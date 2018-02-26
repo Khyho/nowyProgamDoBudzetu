@@ -5,35 +5,26 @@
 
 using namespace std;
 
-int main()
-{
+int main(){
     Users users;
 
     char choice='0';
-    int userID=0;
 
     while (true){
+        if (users.getLoggedInUsersID()==0){
             system ("cls");
             cout << "Witaj w programie do organizacji domowego budzetu. Co chcesz zrobic?"<<endl;
             cout << "1. Logowanie"<<endl;
             cout << "2. Rejestracja"<<endl;
-            cout << "3. Zmiana hasla"<<endl;
-            cout << "4. Wylogowanie"<<endl;
             cout << "9. Wyjscie"<<endl;
             cin>>choice;
 
             switch (choice){
             case '1':
-                userID = users.signIn();
+                users.signIn();
                 break;
             case '2':
                 users.registration();
-                break;
-            case '3':
-                users.changeUsersPassword(userID);
-                break;
-            case '4':
-                userID = users.logOut();
                 break;
             case '9':
                 cout << "Dziekuje za skorzystanie z programu. Do zobaczenia."<<endl;
@@ -45,6 +36,25 @@ int main()
                 Sleep(2500);
                 break;
             }
+        }else if (users.getLoggedInUsersID()!=0){
+            system ("cls");
+            cout << "1. Zmiana hasla"<<endl;
+            cout << "2. Wylogowanie"<<endl;
+            cin>>choice;
+
+            switch (choice){
+                case '1':
+                    users.changeUsersPassword();
+                    break;
+                case '2':
+                    users.logOut();
+                    break;
+                default:
+                    cout << "Podano zly numer, wybierz ponownie."<<endl;
+                    Sleep(2500);
+                    break;
+            }
+        }
     }
     return 0;
 }

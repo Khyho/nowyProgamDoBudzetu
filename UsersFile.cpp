@@ -57,7 +57,6 @@ void UsersFile::addUserToFile (User user){
 }
 
 void UsersFile::changeTheUserInTheFile(vector <User> &users){
-    User user;
     CMarkup xml;
         xml.AddElem( "Users" );
         xml.IntoElem();
@@ -65,11 +64,11 @@ void UsersFile::changeTheUserInTheFile(vector <User> &users){
         for (vector <User>::iterator  itr = users.begin(); itr != users.end(); itr++){
             xml.AddElem( "User" );
             xml.IntoElem();
-            xml.AddElem( "userID", itr -> getUserID());
-            xml.AddElem( "login", itr -> getLogin());
-            xml.AddElem( "password", itr -> getPassword());
-            xml.AddElem( "name", itr -> getName());
-            xml.AddElem( "surname", itr -> getSurname());
+            xml.AddElem( "userID", itr -> User::getUserID());
+            xml.AddElem( "login", itr -> User::getLogin());
+            xml.AddElem( "password", itr -> User::getPassword());
+            xml.AddElem( "name", itr -> User::getName());
+            xml.AddElem( "surname", itr -> User::getSurname());
             xml.OutOfElem();
             xml.Save(fileName);
         }

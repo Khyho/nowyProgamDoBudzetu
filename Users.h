@@ -16,8 +16,10 @@ public:
     Users ();
     virtual ~Users ();
 
+    int getLoggedInUsersID ();
+    void setLoggedInUsersID (int userID);
     void registration ();
-    int signIn ();
-    void changeUsersPassword (int loggedInUsersId);
-    int logOut ();
+    void signIn ();
+    void changeUsersPassword ();
+    void logOut ();
 };

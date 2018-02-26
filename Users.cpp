@@ -15,6 +15,13 @@ Users::~Users(){
     users.clear();
 }
 
+int Users::getLoggedInUsersID(){
+    return loggedInUsersId;
+}
+void Users::setLoggedInUsersID (int userID){
+    loggedInUsersId = userID;
+}
+
 User Users::enterUserData(){
 User user;
 string login;
@@ -75,12 +82,12 @@ void Users::registration(){
 	system("pause");
 }
 
-int Users::signIn (){
-    User user;
+void Users::signIn (){
     string login = "", password = "";
+    int attempts = 3;
 
     vector <User>::iterator itr = users.begin();
-    for (int attempts = 3; attempts > 0; attempts--){
+    for (; attempts > 0; attempts--){
             cout << "LOGOWANIE."<<endl;
             cout <<  "Podaj login: "<<endl;
             cin >> login;
@@ -89,35 +96,43 @@ int Users::signIn (){
             cin >> password;
 
             for (;itr != users.end();itr++){
-                if (itr -> getLogin() == login && itr -> getPassword() == password){
+                if (itr -> User::getLogin() == login && itr -> User::getPassword() == password){
                     cout << endl << "Zalogowales sie." << endl << endl;
                     system("pause");
-                    return itr -> getUserID();
+                    setLoggedInUsersID(itr -> User::getUserID());
+                    attempts = 0;
                 }
             }
+            if (getLoggedInUsersID()==0){
                 cout << "Blednie podany login i/lub haslo."<<endl;
                 cout <<"Pozostalo: "<<attempts-1<<" proby."<<endl;
                 system("pause");
                 itr = users.begin();
                 system("cls");
-    }
+            }
+    }if (attempts ==0&&getLoggedInUsersID()==0){
     cout << "Wprowadzono 3 razy bledne login i/lub haslo. Powrot do menu glownego." << endl;
     system("pause");
-    return 0;
+    }
 }
 
-void Users::changeUsersPassword (int userID){
-    User user;
+void Users::changeUsersPassword (){
     string newPassword;
-    cout << "Wprowadz nowe haslo: ";
-    cin >> newPassword;
-    vector <User>::iterator itr = users.begin()+userID-1;
-    itr -> setPassword(newPassword);
+    if (getLoggedInUsersID()!=0){
+        cout << "Wprowadz nowe haslo: ";
+        cin >> newPassword;
+        vector <User>::iterator itr = users.begin()+getLoggedInUsersID()-1;
+        itr -> User::setPassword(newPassword);
 
-    usersFile.changeTheUserInTheFile(users);
+        usersFile.changeTheUserInTheFile(users);
+    }else{
+    cout <<"Bledny uzytkownik. By zmienic haslo musisz byc zalogowany!"<<endl;
+    }
 }
 
-int Users::logOut(){
-    int userID;
-    return userID=0;
+void Users::logOut(){
+    setLoggedInUsersID(0);
+    system("cls");
+    cout << "Wylogowano."<<endl;
+    system("pause");
 }

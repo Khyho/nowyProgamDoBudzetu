@@ -2,12 +2,13 @@
 #include <vector>
 #include <windows.h>
 #include "Users.h"
+#include "HomeBudget.h"
 
 using namespace std;
 
 int main(){
     Users users;
-
+    HomeBudget homeBudget;
     char choice='0';
 
     while (true){
@@ -38,15 +39,23 @@ int main(){
             }
         }else if (users.getLoggedInUsersID()!=0){
             system ("cls");
-            cout << "1. Zmiana hasla"<<endl;
-            cout << "2. Wylogowanie"<<endl;
+            cout << "1. Dodaj Przychod."<<endl;
+            cout << "3. Bilanse."<<endl;
+            cout << "8. Zmiana hasla."<<endl;
+            cout << "9. Wylogowanie."<<endl;
             cin>>choice;
-
+            Incomes incomes (users.getLoggedInUsersID());
             switch (choice){
                 case '1':
+                    incomes.addIncome();
+                    break;
+                case '3':
+                    homeBudget.showTheBalance(users.getLoggedInUsersID());
+                    break;
+                case '8':
                     users.changeUsersPassword();
                     break;
-                case '2':
+                case '9':
                     users.logOut();
                     break;
                 default:

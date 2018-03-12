@@ -17,3 +17,10 @@ int TypeConversion::changeStringToInt (string text){
     iss >> i;
     return i;
 }
+
+string TypeConversion::convertFloat (float value) {
+  ostringstream o;
+  if (!(o << value))
+    return "";
+  return o.str();
+}

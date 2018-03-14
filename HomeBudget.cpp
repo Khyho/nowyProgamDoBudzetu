@@ -7,16 +7,47 @@
 
 using namespace std;
 
-void HomeBudget::showTheBalance (int loggedInUsersID){
-    Incomes incomes (loggedInUsersID);
-    Date date;
+HomeBudget::HomeBudget(int loggedInUsersID)
+{
+    try
+    {
+        if (loggedInUsersID <= 0)
+        {
+            throw 0;
+        }
+        else
+        {
+            this->userID = loggedInUsersID;
+            incomes = new Incomes(userID);
+        }
+    }
+    catch (int incorrectUserId)
+    {
+        cout << endl << "Blad! Nie jestes zalogowany!" << endl << endl;
+        system("pause");
+        exit(0);
+    }
+}
+
+HomeBudget::~HomeBudget()
+{
+    delete incomes;
+}
+
+void HomeBudget::addIncome()
+{
+    incomes->addIncome();
+}
+
+void HomeBudget::TheBalance (){
     SYSTEMTIME st;
-    int setMonth = 0;
-    int setYear = 0;
+    int month = 0;
+    int year = 0;
     string earlierDateString = "";
     string laterDateString = "";
-    int earlierDate = 0;
-    int laterDate = 0;
+    int startDate = 0;
+    int endDate = 0;
+
     char choice = 0;
     int i=0;
 
@@ -31,27 +62,31 @@ void HomeBudget::showTheBalance (int loggedInUsersID){
             switch (choice){
                 case '1':
                     GetLocalTime(&st);
-                    setMonth = st.wMonth;
-                    setYear = st.wYear;
-                    showTheIncomes(incomes.getIncomes(), setMonth, setYear);
+                    month = st.wMonth;
+                    year = st.wYear;
+                    startDate = date.getFirstDateInMonth(month, year);
+                    endDate = date.getLastDateInMonth(month, year);
+                    showBalance(startDate, endDate);
                 break;
                 case '2':
                     GetLocalTime(&st);
                     if (st.wMonth>=2){
-                        setMonth = st.wMonth-1;
-                        setYear = st.wYear;
+                        month = st.wMonth-1;
+                        year = st.wYear;
                     }else if (st.wMonth==1){
-                        setMonth = 12;
-                        setYear = st.wYear-1;
+                        month = 12;
+                        year = st.wYear-1;
                     }
-                    showTheIncomes(incomes.getIncomes(), setMonth, setYear);
+                    startDate = date.getFirstDateInMonth(month, year);
+                    endDate = date.getLastDateInMonth(month, year);
+                    showBalance(startDate, endDate);
                 break;
                 case '3':
                     cout<<"Podaj date od ktorej maja byc wyswietlone przychody (w formacie RRRR-MM-DD): ";
                     cin>>earlierDateString;
                     while (i <1){
                         if(date.checkTheCorrectnessOfTheDate(earlierDateString)==true && earlierDateString.length()==10){
-                            earlierDate = date.changeStringDateToInt(earlierDateString);
+                            startDate = date.convertStringDateToInt(earlierDateString);
                             i++;
                         }else {
                             cout << "Blednie wprowadzona data. Wprowadz ponownie w formacie RRRR-MM-DD: ";
@@ -65,7 +100,7 @@ void HomeBudget::showTheBalance (int loggedInUsersID){
                     cin>>laterDateString;
                     while (i <1){
                         if(date.checkTheCorrectnessOfTheDate(laterDateString)==true && laterDateString.length()==10){
-                            laterDate = date.changeStringDateToInt(laterDateString);
+                            endDate = date.convertStringDateToInt(laterDateString);
                             i++;
                         }else {
                             cout << "Blednie wprowadzona data. Wprowadz ponownie w formacie RRRR-MM-DD: ";
@@ -74,7 +109,7 @@ void HomeBudget::showTheBalance (int loggedInUsersID){
                             i=0;}
                     }
                     cout<<endl;
-                    showTheIncomesBalanceFromTheSelectedPeriod (incomes.getIncomes(), earlierDate, laterDate);
+                    showBalance (startDate, endDate);
                 break;
                 case '9':
 
@@ -87,78 +122,28 @@ void HomeBudget::showTheBalance (int loggedInUsersID){
     }
 }
 
-void HomeBudget::showTheIncomes (vector <Income> incomes, int month, int year){
-    Income income;
-    Date date;
-    system("cls");
-    cin.sync();
-    int yearIncome = 0;
-    int monthIncome = 0;
+void HomeBudget::showBalance(int startDate, int endDate)
+{
+    vector<Income> selectedIncomes;
 
-    float sumOfAmount = 0;
+    float difference = 0.0f;
+    float incomesSum = 0.0f;
 
-    //sorting(incomes);
 
-    if (!incomes.empty())
-    {   cout<<endl;
-        cout<<"---PRZYCHODY---"<<endl;
-        for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++)
-        {   date.setMonthAndYear(itr -> Income::getDate(), yearIncome, monthIncome);
-            if (month == monthIncome && year == yearIncome){
-                cout << "IncomeID:      " << itr -> Income::getIncomeID() << endl;
-                cout << "Data:          " << date.convertDateFromIntToStringWithDash(itr -> Income::getDate()) << endl;
-                cout << "Item:          " << itr -> Income::getItem() << endl;
-                cout << "amount:        " << itr -> Income::getAmount() << endl;
-                cout << "---------------" <<endl;
-                sumOfAmount +=itr -> Income::getAmount();
-            }
-        }
-        cout << endl;
-        cout << "Suma przychodow: "<<sumOfAmount;
-        cout << endl;
+    selectedIncomes = incomes->getIncomesFromSelectedPeriod(startDate, endDate);
 
-    }
-    else
-    {
-        cout << "Brak przychodow." << endl << endl;
-    }
 
-system("pause");
-}
+    incomesSum = incomes->getIncomesSum(selectedIncomes);
 
-void HomeBudget::showTheIncomesBalanceFromTheSelectedPeriod (vector <Income> incomes, int earlierDate, int laterDate){
-    Date date;
-    cin.sync();
-    float sumOfAmount = 0;
+    cout << "               >>> PRZYCHODY <<<" << endl;
+    cout << "-----------------------------------------------" << endl;
+    incomes->showSelectedIncomes(selectedIncomes);
 
-   // sorting(incomes);
+    cout << "-----------------------------------------------" << endl;
+    cout << "SUMA PRZYCHODOW: " << incomesSum << endl;
+    cout << "-----------------------------------------------" << endl;
+    cout << endl;
 
-    if (!incomes.empty() && earlierDate<laterDate){
-        cout<<endl;
-        cout<<"---PRZYCHODY---"<<endl;
-        for (vector <Income> :: iterator itr = incomes.begin(); itr != incomes.end(); itr++){
-            if (itr -> Income::getDate()>=earlierDate && itr -> Income::getDate() <= laterDate){
-                cout << "IncomeID:      " << itr -> Income::getIncomeID() << endl;
-                cout << "Data:          " << date.convertDateFromIntToStringWithDash(itr -> Income::getDate()) << endl;
-                cout << "Item:          " << itr -> Income::getItem() << endl;
-                cout << "amount:        " << itr -> Income::getAmount() << endl;
-                cout << "---------------" <<endl;
-                sumOfAmount +=itr -> Income::getAmount();
-            }
-        }
-        cout << endl;
-        cout << "Suma Przychodow: "<<sumOfAmount;
-        cout << endl;
-    }else
-    {
-        cout << "Brak przychodow." << endl << endl;
-    }
+
     system("pause");
 }
-/*
-void HomeBudget::sorting(vector <Income> &incomes){
-    sort(incomes.begin(), incomes.end(), [](Income& left, Income& right){
-         return left.getDate() < right.getDate();
-        });
-}*/
-

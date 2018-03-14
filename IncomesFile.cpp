@@ -26,11 +26,11 @@ void IncomesFile::loadAllIncomesFromFile (vector <Income> &incomes){
             while ( xml.FindElem("Income")){
                 xml.IntoElem();
                 xml.FindElem( "incomeID" );
-                    income.setIncomeID(typeConversion.changeStringToInt(xml.GetData()));
+                    income.setIncomeID(typeConversion.convertStringToInt(xml.GetData()));
                 xml.FindElem( "userID" );
-                    income.setUserID(typeConversion.changeStringToInt(xml.GetData()));
+                    income.setUserID(typeConversion.convertStringToInt(xml.GetData()));
                 xml.FindElem( "date" );
-                    income.setDate(date.changeStringDateToInt(xml.GetData()));
+                    income.setDate(date.convertStringDateToInt(xml.GetData()));
                 xml.FindElem( "item" );
                     income.setItem(xml.GetData());
                 xml.FindElem( "amount" );
@@ -53,11 +53,11 @@ void IncomesFile::loadIncomesFromAFileForTheLoggedinUser (vector <Income> &incom
             while ( xml.FindElem("Income")){
                 xml.IntoElem();
                 xml.FindElem( "incomeID" );
-                    income.setIncomeID(typeConversion.changeStringToInt(xml.GetData()));
+                    income.setIncomeID(typeConversion.convertStringToInt(xml.GetData()));
                 xml.FindElem( "userID" );
-                    income.setUserID(typeConversion.changeStringToInt(xml.GetData()));
+                    income.setUserID(typeConversion.convertStringToInt(xml.GetData()));
                 xml.FindElem( "date" );
-                    income.setDate(date.changeStringDateToInt(xml.GetData()));
+                    income.setDate(date.convertStringDateToInt(xml.GetData()));
                 xml.FindElem( "item" );
                     income.setItem(xml.GetData());
                 xml.FindElem( "amount" );

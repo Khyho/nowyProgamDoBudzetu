@@ -34,23 +34,23 @@ float Income::getAmount(){
     return amount;
 }
 
-void Income::setIncomeID (int incID){
-    incomeID = incID;
+void Income::setIncomeID (int incomeID){
+    this->incomeID = incomeID;
 }
 
-void Income::setUserID (int usID){
-    userID = usID;
+void Income::setUserID (int userID){
+    this->userID = userID;
 }
 
-void Income::setDate(int d){
-    date = d;
+void Income::setDate(int date){
+    this->date = date;
 }
 
-void Income::setItem (string ite){
-    item = ite;
+void Income::setItem (string item){
+    this->item = item;
 }
-void Income::setAmount (float am){
-    amount = am;
+void Income::setAmount (float amount){
+    this->amount = amount;
 }
 
 void Income::enterDate(){
@@ -80,24 +80,11 @@ void Income::enterItem(){
 }
 
 void Income::enterAmount(){
+    Amount amount;
     string am;
     cout << "Podaj wartosc przychodu: "<<endl;
     cin >> am;
-    this->amount = setTheDot(am);
+    this->amount = amount.setTheDot(am);
 }
 
-float Income::setTheDot (string amount){
 
-int i = 0;
-    while (i<amount.length()){
-       if (amount [i] != 46 && amount [i] !=44){
-        i++;
-       }else if (amount [i]==46){
-        i++;
-       }else if (amount [i]==44){
-        amount [i] = '.';
-        i++;
-       }
-    }
-return atof(amount.c_str());
-}

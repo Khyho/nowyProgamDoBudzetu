@@ -8,7 +8,6 @@ using namespace std;
 
 int main(){
     Users users;
-    HomeBudget homeBudget;
     char choice='0';
 
     while (true){
@@ -44,13 +43,13 @@ int main(){
             cout << "8. Zmiana hasla."<<endl;
             cout << "9. Wylogowanie."<<endl;
             cin>>choice;
-            Incomes incomes (users.getLoggedInUsersID());
+            HomeBudget homeBudget(users.getLoggedInUsersID());
             switch (choice){
                 case '1':
-                    incomes.addIncome();
+                    homeBudget.addIncome();
                     break;
                 case '3':
-                    homeBudget.showTheBalance(users.getLoggedInUsersID());
+                    homeBudget.TheBalance();
                     break;
                 case '8':
                     users.changeUsersPassword();

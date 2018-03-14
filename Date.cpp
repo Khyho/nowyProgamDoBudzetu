@@ -28,10 +28,10 @@ int Date::enterAnyDate(){
             i = 0;
             }
         }
-return changeStringDateToInt(date);
+return convertStringDateToInt(date);
 }
 
-int Date::changeStringDateToInt(string date){
+int Date::convertStringDateToInt(string date){
     string auxiliaryWord ="";
     int year = 0;
     int month = 0;
@@ -103,15 +103,15 @@ void Date::divideTheDateIntoYearMonthDay (string date, int &year, int &month, in
         for (int i = 0; i <=7; i++){
                 if (i==3){
                     auxiliaryWord+=date[i];
-                    year = typeConversion.changeStringToInt(auxiliaryWord);
+                    year = typeConversion.convertStringToInt(auxiliaryWord);
                     auxiliaryWord ="";
                 }else if (i==5){
                     auxiliaryWord+=date[i];
-                    month = typeConversion.changeStringToInt(auxiliaryWord);
+                    month = typeConversion.convertStringToInt(auxiliaryWord);
                     auxiliaryWord ="";
                 }else if (i==7){
                     auxiliaryWord+=date[i];
-                    day = typeConversion.changeStringToInt(auxiliaryWord);
+                    day = typeConversion.convertStringToInt(auxiliaryWord);
                 } else {
                     auxiliaryWord+=date[i];
                 }
@@ -169,37 +169,37 @@ string Date::convertDateFromIntToStringWithDash(int d){
     int month = 0;
     int day = 0;
 
-    dateBeforeDivide = typeConversion.changeIntToString(d);
+    dateBeforeDivide = typeConversion.convertIntToString(d);
     divideTheDateIntoYearMonthDay(dateBeforeDivide, year, month, day);
     if (month <=9){
         if (day<=9){
-        return dateAfterDivide = typeConversion.changeIntToString(year)+"-0"+typeConversion.changeIntToString(month)+"-0"+typeConversion.changeIntToString(day);
+        return dateAfterDivide = typeConversion.convertIntToString(year)+"-0"+typeConversion.convertIntToString(month)+"-0"+typeConversion.convertIntToString(day);
         }else if (day>9){
-        return dateAfterDivide = typeConversion.changeIntToString(year)+"-0"+typeConversion.changeIntToString(month)+"-"+typeConversion.changeIntToString(day);
+        return dateAfterDivide = typeConversion.convertIntToString(year)+"-0"+typeConversion.convertIntToString(month)+"-"+typeConversion.convertIntToString(day);
         }
     }else if (month >9){
         if (day<=9){
-        return dateAfterDivide = typeConversion.changeIntToString(year)+"-"+typeConversion.changeIntToString(month)+"-0"+typeConversion.changeIntToString(day);
+        return dateAfterDivide = typeConversion.convertIntToString(year)+"-"+typeConversion.convertIntToString(month)+"-0"+typeConversion.convertIntToString(day);
         }else if (day>9){
-        return dateAfterDivide = typeConversion.changeIntToString(year)+"-"+typeConversion.changeIntToString(month)+"-"+typeConversion.changeIntToString(day);
+        return dateAfterDivide = typeConversion.convertIntToString(year)+"-"+typeConversion.convertIntToString(month)+"-"+typeConversion.convertIntToString(day);
         }
     }
 }
 
-void Date::setMonthAndYear (int dateINT, int &year, int &month){
-TypeConversion typeConversion;
-    string date = typeConversion.changeIntToString(dateINT);
-    string auxiliaryWord ="";
-        for (int i = 0; i <=5; i++){
-                if (i==3){
-                    auxiliaryWord+=date[i];
-                    year = typeConversion.changeStringToInt(auxiliaryWord);
-                    auxiliaryWord ="";
-                }else if (i==5){
-                    auxiliaryWord+=date[i];
-                    month = typeConversion.changeStringToInt(auxiliaryWord);
-                } else {
-                    auxiliaryWord+=date[i];
-                }
-            }
+int Date::getFirstDateInMonth (int month, int year){
+    return year*10000+month*100+1;
+}
+
+int Date::getLastDateInMonth (int month, int year){
+    if (month == 2){
+        if(leapYear(year) == true){
+            return year*10000+month*100+29;
+        }else if (leapYear(year)==false){
+            return year*10000+month*100+28;}
+        else {return false;}
+    }else if (month == 1 || month == 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12){
+        return year*10000+month*100+31;
+    }else if (month == 4 || month == 6 || month == 9 || month == 11){
+        return year*10000+month*100+30;
+    }
 }

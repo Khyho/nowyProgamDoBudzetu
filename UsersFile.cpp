@@ -21,7 +21,7 @@ void UsersFile::loadAllUsersFromFile (vector <User> &users){
             while ( xml.FindElem("User")){
                 xml.IntoElem();
                 xml.FindElem( "userID" );
-                user.setUserID(typeConversion.changeStringToInt(xml.GetData()));
+                user.setUserID(typeConversion.convertStringToInt(xml.GetData()));
                 xml.FindElem( "login" );
                 user.setLogin(xml.GetData());
                 xml.FindElem( "password" );

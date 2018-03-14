@@ -15,7 +15,7 @@ public:
     int downloadTodaysDate();
     int enterAnyDate();
     string convertDateFromIntToStringWithDash (int date);
-    int changeStringDateToInt(string date);
-    void setMonthAndYear (int date, int &year, int &month);
-
+    int convertStringDateToInt(string date);
+    int getFirstDateInMonth ( int month, int year);
+    int getLastDateInMonth ( int month, int year);
 };

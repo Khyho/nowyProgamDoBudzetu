@@ -13,8 +13,6 @@ private:
     string item;
     float amount;
 
-    float setTheDot (string amount);
-
 public:
     Income ();
     virtual ~Income();
@@ -25,11 +23,11 @@ public:
     string getItem ();
     float getAmount();
 
-    void setIncomeID (int incID);
-    void setUserID (int usID);
-    void setDate(int d);
-    void setItem (string ite);
-    void setAmount (float am);
+    void setIncomeID (int incomeID);
+    void setUserID (int userID);
+    void setDate(int date);
+    void setItem (string item);
+    void setAmount (float amount);
 
     void enterDate();
     void enterItem();

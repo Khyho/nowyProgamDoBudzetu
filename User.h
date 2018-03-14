@@ -21,7 +21,7 @@ public:
     string getName();
     string getSurname();
 
-    void setUserID (int id);
+    void setUserID (int userID);
     void setLogin (string login);
     void setPassword (string password);
     void setName (string name);

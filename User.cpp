@@ -33,24 +33,24 @@ string User::getSurname(){
     return surname;
 }
 
-void User::setUserID (int id){
-    userID = id;
+void User::setUserID (int userID){
+    this->userID = userID;
 }
 
-void User::setLogin (string log){
-    login = log;
+void User::setLogin (string login){
+    this->login = login;
 }
 
-void User::setPassword (string pass){
-    password = pass;
+void User::setPassword (string password){
+    this->password = password;
 }
 
-void User::setName (string n){
-    name = n;
+void User::setName (string name){
+    this->name = name;
 }
 
-void User::setSurname (string s){
-    surname = s;
+void User::setSurname (string surname){
+    this->surname = surname;
 }
 
 

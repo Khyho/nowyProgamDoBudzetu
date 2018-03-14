@@ -6,10 +6,14 @@ using namespace std;
 
 class HomeBudget {
 
-    void showTheIncomes (vector <Income> incomes, int month, int year);
-   // void sorting(vector <Income> &incomes);
+    int userID;
+    Date date;
+    Incomes *incomes;
 
     public:
-    void showTheBalance(int loggedInUsersID);
-    void showTheIncomesBalanceFromTheSelectedPeriod (vector <Income> incomes, int earlierDate, int laterDate);
+    HomeBudget (int loggedInUsersID);
+    virtual ~HomeBudget();
+    void addIncome();
+    void TheBalance ();
+    void showBalance(int startDate, int endDate);
 };

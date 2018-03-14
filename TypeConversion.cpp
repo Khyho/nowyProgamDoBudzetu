@@ -4,14 +4,14 @@
 
 using namespace std;
 
-string TypeConversion::changeIntToString(int number){
+string TypeConversion::convertIntToString(int number){
     ostringstream ss;
     ss << number;
     string str = ss.str();
     return str;
 }
 
-int TypeConversion::changeStringToInt (string text){
+int TypeConversion::convertStringToInt (string text){
     int i;
     istringstream iss(text);
     iss >> i;

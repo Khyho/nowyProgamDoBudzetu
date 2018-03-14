@@ -6,8 +6,8 @@ using namespace std;
 class TypeConversion {
 
 public:
-    string changeIntToString(int number);
-    int changeStringToInt(string text);
+    string convertIntToString(int number);
+    int convertStringToInt(string text);
     string convertFloat (float value);
 };
 

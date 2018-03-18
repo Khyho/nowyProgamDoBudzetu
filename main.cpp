@@ -39,6 +39,7 @@ int main(){
         }else if (users.getLoggedInUsersID()!=0){
             system ("cls");
             cout << "1. Dodaj Przychod."<<endl;
+            cout << "2. Dodaj Wydatek."<<endl;
             cout << "3. Bilanse."<<endl;
             cout << "8. Zmiana hasla."<<endl;
             cout << "9. Wylogowanie."<<endl;
@@ -47,6 +48,9 @@ int main(){
             switch (choice){
                 case '1':
                     homeBudget.addIncome();
+                    break;
+                case '2':
+                    homeBudget.addExpense();
                     break;
                 case '3':
                     homeBudget.TheBalance();

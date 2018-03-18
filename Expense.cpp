@@ -1,65 +1,65 @@
 #include <iostream>
 #include <windows.h>
-#include "Income.h"
+#include "Expense.h"
 
 using namespace std;
 
-Income::Income(){
-    incomeID = 0;
+Expense::Expense(){
+    expenseID = 0;
     userID = 0;
     date = 19000101;
     item = "";
     amount = 0.0;
 }
 
-Income::~Income(){};
+Expense::~Expense(){};
 
-int Income::getIncomeID(){
-    return incomeID;
+int Expense::getExpenseID(){
+    return expenseID;
 }
 
-int Income::getUserID(){
+int Expense::getUserID(){
     return userID;
 }
 
-int Income::getDate(){
+int Expense::getDate(){
     return date;
 }
 
-string Income::getItem(){
+string Expense::getItem(){
     return item;
 }
 
-float Income::getAmount(){
+float Expense::getAmount(){
     return amount;
 }
 
-void Income::setIncomeID (int incomeID){
-    this->incomeID = incomeID;
+void Expense::setExpenseID (int expenseID){
+    this->expenseID = expenseID;
 }
 
-void Income::setUserID (int userID){
+void Expense::setUserID (int userID){
     this->userID = userID;
 }
 
-void Income::setDate(int date){
+void Expense::setDate(int date){
     this->date = date;
 }
 
-void Income::setItem (string item){
+void Expense::setItem (string item){
     this->item = item;
 }
-void Income::setAmount (float amount){
+void Expense::setAmount (float amount){
     this->amount = amount;
 }
 
-void Income::enterDate(){
+void Expense::enterDate(){
 
     char choice;
     Date date;
 
     do{
-        cout<<"Podaj date przychodu: "<<endl;
+        cout<<"Podaj date wydatku: "<<endl;
         cout<<"1. Dzisiejsza."<<endl;
         cout<<"2. Inna data."<<endl;
         cin >>choice;
@@ -74,25 +74,25 @@ void Income::enterDate(){
     }while (choice!='1' && choice!='2');
 }
 
-void Income::enterItem(){
-    cout << "Podaj czego dotyczy przychod: "<<endl;
+void Expense::enterItem(){
+    cout << "Podaj czego dotyczy wydatek: "<<endl;
     getline(cin, this->item);
 }
 
-void Income::enterAmount(){
+void Expense::enterAmount(){
     Amount amount;
     string am;
     int i=0;
     while (i<1){
         am = "";
-        cout << "Podaj wartosc przychodu: "<<endl;
+        cout << "Podaj wartosc wydatku: "<<endl;
         cin >> am;
         if (amount.checkTheAmount(am)==true){
             this->amount = amount.setTheDot(am);
             i++;
         }else if (amount.checkTheAmount(am)==false){
             system ("cls");
-            cout<< "Blednie podana wartosc przychodu."<<endl;
+            cout<< "Blednie podana wartosc wydatku."<<endl;
         }
     }
 }

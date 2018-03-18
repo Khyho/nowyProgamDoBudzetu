@@ -16,7 +16,7 @@ int Date::downloadTodaysDate(){
 int Date::enterAnyDate(){
     string date;
     int i = 0;
-    cout <<"Podaj date przychodu (w formacie RRRR-MM-DD): ";
+    cout <<"Podaj date (w formacie RRRR-MM-DD): ";
     cin >> date;
         while (i < 1){
             if (checkTheCorrectnessOfTheDate(date)==true && date.length()==10){

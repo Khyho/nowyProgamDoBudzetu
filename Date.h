@@ -1,5 +1,6 @@
 #include <iostream>
 #include "TypeConversion.h"
+#pragma once
 
 using namespace std;
 

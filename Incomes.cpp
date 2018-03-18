@@ -83,8 +83,8 @@ void Incomes::showSelectedIncomes(vector<Income> &selectedIncomes)
 
         for (vector<Income>::iterator itr = selectedIncomes.begin(); itr != selectedIncomes.end(); itr++)
         {
-            cout << "Data:      " << date.convertDateFromIntToStringWithDash(itr->Income::getDate()) << endl;
-            cout << "Element:      " << itr->Income::getItem() << endl;
+            cout << "Data:       " << date.convertDateFromIntToStringWithDash(itr->Income::getDate()) << endl;
+            cout << "Element:    " << itr->Income::getItem() << endl;
             cout << "Wartosc:    " << itr->Income::getAmount() << endl << endl;
         }
     }

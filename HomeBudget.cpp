@@ -78,24 +78,18 @@ void HomeBudget::TheBalance (){
 
 void HomeBudget::showBalanceFromCurrentMonth(){
     SYSTEMTIME st;
-    int month = 0;
-    int year = 0;
-    int startDate = 0;
-    int endDate = 0;
     GetLocalTime(&st);
-    month = st.wMonth;
-    year = st.wYear;
-    startDate = date.getFirstDateInMonth(month, year);
-    endDate = date.getLastDateInMonth(month, year);
+    int month = st.wMonth;
+    int year = st.wYear;
+    int startDate = date.getFirstDateInMonth(month, year);
+    int endDate = date.getLastDateInMonth(month, year);
     showBalance(startDate, endDate);
 }
 
 void HomeBudget::showBalanceFromPreviousMonth(){
     SYSTEMTIME st;
-    int month = 0;
-    int year = 0;
-    int startDate = 0;
-    int endDate = 0;
+    int month=0;
+    int year=0;
     GetLocalTime(&st);
     if (st.wMonth>=2){
         month = st.wMonth-1;
@@ -104,8 +98,8 @@ void HomeBudget::showBalanceFromPreviousMonth(){
         month = 12;
         year = st.wYear-1;
     }
-    startDate = date.getFirstDateInMonth(month, year);
-    endDate = date.getLastDateInMonth(month, year);
+    int startDate = date.getFirstDateInMonth(month, year);
+    int endDate = date.getLastDateInMonth(month, year);
     showBalance(startDate, endDate);
 }
 
@@ -145,8 +139,7 @@ void HomeBudget::showBalanceFromSelectedPeriod(){
     showBalance (startDate, endDate);
 }
 
-void HomeBudget::showBalance(int startDate, int endDate)
-{
+void HomeBudget::showBalance(int startDate, int endDate){
     vector<Income> selectedIncomes;
     vector<Expense> selectedExpenses;
 

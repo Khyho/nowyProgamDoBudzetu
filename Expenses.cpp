@@ -69,10 +69,10 @@ vector<Expense> Expenses::getExpensesFromSelectedPeriod(int startDate, int endDa
 
 void Expenses::sortExpensesByDateInAscendingOrder(vector<Expense> &selectedExpenses)
 {
-   /* sort(selectedExpenses.begin(), selectedExpenses.end(), [](Expense& firstExpense, Expense& secondExpense)
+    sort(selectedExpenses.begin(), selectedExpenses.end(), [](Expense& firstExpense, Expense& secondExpense)
     {
        return firstExpense.getDate() < secondExpense.getDate();
-    });*/
+    });
 }
 
 void Expenses::showSelectedExpenses(vector<Expense> &selectedExpenses)

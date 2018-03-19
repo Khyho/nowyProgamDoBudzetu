@@ -69,10 +69,10 @@ vector<Income> Incomes::getIncomesFromSelectedPeriod(int startDate, int endDate)
 
 void Incomes::sortIncomesByDateInAscendingOrder(vector<Income> &selectedIncomes)
 {
-   /* sort(selectedIncomes.begin(), selectedIncomes.end(), [](Income& firstIncome, Income& secondIncome)
+    sort(selectedIncomes.begin(), selectedIncomes.end(), [](Income& firstIncome, Income& secondIncome)
     {
        return firstIncome.getDate() < secondIncome.getDate();
-    });*/
+    });
 }
 
 void Incomes::showSelectedIncomes(vector<Income> &selectedIncomes)
